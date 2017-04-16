@@ -71,10 +71,12 @@ namespace CMon.IoTApp
             var json = _dataReader.ReadString(bytes);
             Debug.Write(json);
             var reading = JsonConvert.DeserializeObject<Reading>(json);
-
+            
             _viewModel.Power = _viewModel.Voltage * reading.Current;
             _viewModel.ConsumptionKW += _viewModel.Power / (3600 * 1000);
             _viewModel.Time = DateTime.Now - _startDate;
+            _viewModel.ChartMinimumTime = _viewModel.Time - TimeSpan.FromSeconds(60);
+            _viewModel.ChartItems.Add(new MainChartViewModelItem { Power = _viewModel.Power, Time = DateTime.Now - _startDate });
         }
     }
 }

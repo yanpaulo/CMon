@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CMon.IoTApp"
     xmlns:vm="using:CMon.IoTApp.ViewModels"
+    xmlns:sf="using:Syncfusion.UI.Xaml.Charts"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Loaded="Page_Loaded"
@@ -19,7 +20,16 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="8">CMon</TextBlock>
 
-        <Rectangle Grid.Row="1" Fill="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12"></Rectangle>
+        <!--<Rectangle Grid.Row="1" Fill="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12"></Rectangle>-->
+        <sf:SfChart Grid.Row="1" Margin="12">
+            <sf:SfChart.PrimaryAxis>
+                <sf:TimeSpanAxis x:Name="tAxis" Interval="00:00:10" Minimum="{Binding ChartMinimumTime}" Maximum="{Binding Time}"></sf:TimeSpanAxis>
+            </sf:SfChart.PrimaryAxis>
+            <sf:SfChart.SecondaryAxis>
+                <sf:NumericalAxis Minimum="0"></sf:NumericalAxis>
+            </sf:SfChart.SecondaryAxis>
+            <sf:SplineAreaSeries ItemsSource="{Binding ChartItems}" XBindingPath="Time" YBindingPath="Power"></sf:SplineAreaSeries>
+        </sf:SfChart>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace CMon.IoTApp.ViewModels
         private double _power;
         private double _consumptionKW;
         private TimeSpan _time;
+        private TimeSpan _chartMinimumTime;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,5 +45,13 @@ namespace CMon.IoTApp.ViewModels
 
         public decimal ConsumptionMoney => (decimal)ConsumptionKW * Tax;
 
+        public ObservableCollection<MainChartViewModelItem> ChartItems { get; set; } = new ObservableCollection<MainChartViewModelItem>();
+        
+        public TimeSpan ChartMinimumTime
+        {
+            get { return _chartMinimumTime; }
+            set { _chartMinimumTime = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ChartMinimumTime")); }
+        }
+        
     }
 }
