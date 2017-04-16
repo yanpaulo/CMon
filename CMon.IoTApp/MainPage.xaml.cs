@@ -1,10 +1,17 @@
-﻿using System;
+﻿using CMon.IoTApp.Models;
+using CMon.IoTApp.ViewModels;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Enumeration;
+using Windows.Devices.SerialCommunication;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +29,52 @@ namespace CMon.IoTApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private MainPageViewModel _viewModel;
+        private DateTime _startDate;
+
+        private SerialDevice _device;
+        private DispatcherTimer _timer;
+        private DataWriter _dataWriter;
+        private DataReader _dataReader;
+
         public MainPage()
         {
             this.InitializeComponent();
+            _viewModel = (MainPageViewModel)DataContext;
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            string aqs = SerialDevice.GetDeviceSelector();
+            var dis = await DeviceInformation.FindAllAsync(aqs);
+            var info = dis.First();
+
+            _device = await SerialDevice.FromIdAsync(info.Id);
+            _device.BaudRate = 9600;
+            _device.ReadTimeout = TimeSpan.FromMilliseconds(200);
+            _dataReader = new DataReader(_device.InputStream);
+            _dataWriter = new DataWriter(_device.OutputStream);
+
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _timer.Tick += Timer_Tick;
+
+            _startDate = DateTime.Now;
+            _timer.Start();
+        }
+
+        private async void Timer_Tick(object sender, object e)
+        {
+            _dataWriter.WriteString("0");
+            await _dataWriter.StoreAsync().AsTask();
+
+            var bytes = await _dataReader.LoadAsync(1024).AsTask();
+            var json = _dataReader.ReadString(bytes);
+            Debug.Write(json);
+            var reading = JsonConvert.DeserializeObject<Reading>(json);
+
+            _viewModel.Power = _viewModel.Voltage * reading.Current;
+            _viewModel.ConsumptionKW += _viewModel.Power / (3600 * 1000);
+            _viewModel.Time = DateTime.Now - _startDate;
         }
     }
 }
