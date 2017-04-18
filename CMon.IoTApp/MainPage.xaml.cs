@@ -38,7 +38,6 @@ namespace CMon.IoTApp
         
         private DataWriter _dataWriter;
         private DataReader _dataReader;
-        private Random rng = new Random();
 
         public MainPage()
         {
@@ -48,15 +47,15 @@ namespace CMon.IoTApp
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //string aqs = SerialDevice.GetDeviceSelector();
-            //var dis = await DeviceInformation.FindAllAsync(aqs);
-            //var info = dis.First();
+            string aqs = SerialDevice.GetDeviceSelector();
+            var dis = await DeviceInformation.FindAllAsync(aqs);
+            var info = dis.First();
 
-            //_device = await SerialDevice.FromIdAsync(info.Id);
-            //_device.BaudRate = 9600;
-            //_device.ReadTimeout = TimeSpan.FromMilliseconds(200);
-            //_dataReader = new DataReader(_device.InputStream);
-            //_dataWriter = new DataWriter(_device.OutputStream);
+            _device = await SerialDevice.FromIdAsync(info.Id);
+            _device.BaudRate = 9600;
+            _device.ReadTimeout = TimeSpan.FromMilliseconds(200);
+            _dataReader = new DataReader(_device.InputStream);
+            _dataWriter = new DataWriter(_device.OutputStream);
 
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += Timer_Tick;
@@ -67,25 +66,24 @@ namespace CMon.IoTApp
 
         private async void Timer_Tick(object sender, object e)
         {
-            //_dataWriter.WriteString("0");
-            //await _dataWriter.StoreAsync().AsTask();
+            _dataWriter.WriteString("0");
+            await _dataWriter.StoreAsync().AsTask();
 
-            //var bytes = await _dataReader.LoadAsync(1024).AsTask();
-            //var json = _dataReader.ReadString(bytes);
-            //Debug.Write(json);
-            //var reading = JsonConvert.DeserializeObject<Reading>(json);
-
-            //_viewModel.Power = _viewModel.Voltage * reading.Current;
-            //_viewModel.ConsumptionKW += _viewModel.Power / (3600 * 1000);
+            var bytes = await _dataReader.LoadAsync(1024).AsTask();
+            var json = _dataReader.ReadString(bytes);
+            Debug.Write(json);
+            var reading = JsonConvert.DeserializeObject<RawReading>(json);
             var now = DateTime.Now;
-            _viewModel.Power = rng.Next(10, 15);
+
+            _viewModel.Power = _viewModel.Voltage * reading.Current;
+            _viewModel.ConsumptionKW += _viewModel.Power / (3600 * 1000);
             _viewModel.Time = now - _startDate;
 
             _appReadings.Add(new Reading { Value = _viewModel.Power, Date = now });
             UpdateChart(now);
         }
 
-        void UpdateChart(DateTime now)
+        private void UpdateChart(DateTime now)
         {
             _viewModel.ChartItems =
                 _appReadings
@@ -93,7 +91,6 @@ namespace CMon.IoTApp
                 .Take(60)
                 .Select(r => new MainChartViewModelItem { Power = r.Value, Time = now - r.Date })
                 .ToArray();
-
         }
     }
 }
