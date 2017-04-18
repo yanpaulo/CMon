@@ -14,6 +14,7 @@ namespace CMon.IoTApp.ViewModels
         private double _consumptionKW;
         private TimeSpan _time;
         private TimeSpan _chartMinimumTime;
+        private MainChartViewModelItem[] _chartItems;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,6 +27,7 @@ namespace CMon.IoTApp.ViewModels
             get { return _power; }
             set { _power = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Power")); }
         }
+
         public TimeSpan Time
         {
             get { return _time; }
@@ -44,14 +46,11 @@ namespace CMon.IoTApp.ViewModels
         }
 
         public decimal ConsumptionMoney => (decimal)ConsumptionKW * Tax;
-
-        public ObservableCollection<MainChartViewModelItem> ChartItems { get; set; } = new ObservableCollection<MainChartViewModelItem>();
         
-        public TimeSpan ChartMinimumTime
+        public MainChartViewModelItem[] ChartItems
         {
-            get { return _chartMinimumTime; }
-            set { _chartMinimumTime = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ChartMinimumTime")); }
+            get { return _chartItems; }
+            set { _chartItems = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ChartItems")); }
         }
-        
     }
 }

@@ -23,7 +23,7 @@
         <!--<Rectangle Grid.Row="1" Fill="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12"></Rectangle>-->
         <sf:SfChart Grid.Row="1" Margin="12">
             <sf:SfChart.PrimaryAxis>
-                <sf:TimeSpanAxis x:Name="tAxis" Interval="00:00:10" Minimum="{Binding ChartMinimumTime}" Maximum="{Binding Time}"></sf:TimeSpanAxis>
+                <sf:TimeSpanAxis x:Name="tAxis" Interval="00:00:10" Minimum="00:00:00" Maximum="00:01:00"></sf:TimeSpanAxis>
             </sf:SfChart.PrimaryAxis>
             <sf:SfChart.SecondaryAxis>
                 <sf:NumericalAxis Minimum="0"></sf:NumericalAxis>

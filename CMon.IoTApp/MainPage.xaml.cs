@@ -29,11 +29,13 @@ namespace CMon.IoTApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private MainPageViewModel _viewModel;
         private DateTime _startDate;
+        private DispatcherTimer _timer;
+        private MainPageViewModel _viewModel;
+        private List<Reading> _appReadings = AppSingleton.Instance.Readings;
 
         private SerialDevice _device;
-        private DispatcherTimer _timer;
+        
         private DataWriter _dataWriter;
         private DataReader _dataReader;
         private Random rng = new Random();
@@ -75,21 +77,23 @@ namespace CMon.IoTApp
 
             //_viewModel.Power = _viewModel.Voltage * reading.Current;
             //_viewModel.ConsumptionKW += _viewModel.Power / (3600 * 1000);
+            var now = DateTime.Now;
             _viewModel.Power = rng.Next(10, 15);
-            _viewModel.Time = DateTime.Now - _startDate;
-            _viewModel.ChartMinimumTime = _viewModel.Time - TimeSpan.FromSeconds(60);
+            _viewModel.Time = now - _startDate;
 
+            _appReadings.Add(new Reading { Value = _viewModel.Power, Date = now });
+            UpdateChart(now);
+        }
 
-            _viewModel.ChartItems.Add(new MainChartViewModelItem { Power = _viewModel.Power, Time = _viewModel.Time });
-            if (_viewModel.ChartItems.First().Time < _viewModel.ChartMinimumTime)
-            {
-                _viewModel.ChartItems.RemoveAt(0);
-                _viewModel.ChartMinimumTime = _viewModel.ChartItems.First().Time;
-            }
-            else
-            {
-                
-            }
+        void UpdateChart(DateTime now)
+        {
+            _viewModel.ChartItems =
+                _appReadings
+                .OrderByDescending(r => r.Date)
+                .Take(60)
+                .Select(r => new MainChartViewModelItem { Power = r.Value, Time = now - r.Date })
+                .ToArray();
+
         }
     }
 }
