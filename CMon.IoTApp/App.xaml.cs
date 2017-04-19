@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CMon.IoTApp.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,8 +47,13 @@ namespace CMon.IoTApp
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            Frame rootFrame = Window.Current.Content as Frame;
+            //using (var db = new AppDbContext())
+            //{
+            //    db.Database.Migrate();
+            //}
 
+            Frame rootFrame = Window.Current.Content as Frame;
+            
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)

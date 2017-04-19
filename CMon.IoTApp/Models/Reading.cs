@@ -8,6 +8,8 @@ namespace CMon.IoTApp.Models
 {
     public class Reading
     {
+        public int Id { get; set; }
+
         public double Value { get; set; }
 
         public DateTime Date { get; set; }

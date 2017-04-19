@@ -98,6 +98,12 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170419032159_InitialCreate.cs" />
+    <Compile Include="Migrations\20170419032159_InitialCreate.designer.cs">
+      <DependentUpon>20170419032159_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
+    <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\AppSingleton.cs" />
     <Compile Include="Models\RawReading.cs" />
     <Compile Include="Models\Reading.cs" />
