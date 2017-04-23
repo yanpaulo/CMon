@@ -74,9 +74,9 @@ namespace CMon.IoTApp
                     last.Date = now;
                 }
             }
-            
-            
-            _viewModel.Power = (_viewModel.Voltage * _readings.FirstOrDefault()?.Value).GetValueOrDefault(0);
+
+
+            _viewModel.Power = _viewModel.Voltage * _readings.FirstOrDefault()?.Value;
             _viewModel.ConsumptionKW += _viewModel.Power / (3600 * 1000);
             _viewModel.Time = now - _startDate;
             

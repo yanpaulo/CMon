@@ -13,8 +13,8 @@ namespace CMon.IoTApp.ViewModels
     {
         private int? _voltage;
         private decimal? _tax;
-        private double _power;
-        private double _consumptionKW;
+        private double? _power;
+        private double? _consumptionKW;
         private TimeSpan _time;
         private IEnumerable<MainChartViewModelItem> _chartItems;
 
@@ -32,7 +32,7 @@ namespace CMon.IoTApp.ViewModels
             set { _tax = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Tax")); }
         }
         
-        public double Power
+        public double? Power
         {
             get { return _power; }
             set { _power = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Power")); }
@@ -44,7 +44,7 @@ namespace CMon.IoTApp.ViewModels
             set { _time = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Time")); }
         }
 
-        public double ConsumptionKW
+        public double? ConsumptionKW
         {
             get { return _consumptionKW; }
             set
@@ -55,7 +55,7 @@ namespace CMon.IoTApp.ViewModels
             }
         }
 
-        public decimal ConsumptionMoney => (decimal)ConsumptionKW * Tax.GetValueOrDefault(0);
+        public decimal? ConsumptionMoney => (decimal)ConsumptionKW * Tax;
 
         public IEnumerable<MainChartViewModelItem> ChartItems
         {
