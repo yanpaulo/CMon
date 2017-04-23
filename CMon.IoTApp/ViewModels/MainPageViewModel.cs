@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMon.IoTApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,18 +11,27 @@ namespace CMon.IoTApp.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+        private int? _voltage;
+        private decimal? _tax;
         private double _power;
         private double _consumptionKW;
         private TimeSpan _time;
-        private TimeSpan _chartMinimumTime;
-        private MainChartViewModelItem[] _chartItems;
+        private IEnumerable<MainChartViewModelItem> _chartItems;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public int Voltage { get; set; } = 220;
-
-        public decimal Tax { get; set; } = 0.5m;
-
+        
+        public int? Voltage
+        {
+            get { return _voltage; }
+            set { _voltage = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Voltage")); }
+        }
+        
+        public decimal? Tax
+        {
+            get { return _tax; }
+            set { _tax = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Tax")); }
+        }
+        
         public double Power
         {
             get { return _power; }
@@ -45,9 +55,9 @@ namespace CMon.IoTApp.ViewModels
             }
         }
 
-        public decimal ConsumptionMoney => (decimal)ConsumptionKW * Tax;
-        
-        public MainChartViewModelItem[] ChartItems
+        public decimal ConsumptionMoney => (decimal)ConsumptionKW * Tax.GetValueOrDefault(0);
+
+        public IEnumerable<MainChartViewModelItem> ChartItems
         {
             get { return _chartItems; }
             set { _chartItems = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ChartItems")); }

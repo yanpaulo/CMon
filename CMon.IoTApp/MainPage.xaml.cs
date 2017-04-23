@@ -42,6 +42,13 @@ namespace CMon.IoTApp
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            using (var db =  new AppDbContext())
+            {
+                var config = db.GetAppConfiguration();
+                _viewModel.Voltage = config.Voltage;
+                _viewModel.Tax = config.Tax;
+            }
+
             _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += Timer_Tick;
 
@@ -80,7 +87,7 @@ namespace CMon.IoTApp
         {
             _viewModel.ChartItems =
                 _readings
-                .Select(r => new MainChartViewModelItem { Power = r.Value * _viewModel.Voltage, Time = now - r.Date })
+                .Select(r => new MainChartViewModelItem { Power = r.Value * _viewModel.Voltage.GetValueOrDefault(0), Time = now - r.Date })
                 .ToArray();
         }
     }

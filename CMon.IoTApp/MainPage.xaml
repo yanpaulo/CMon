@@ -40,10 +40,10 @@
 
             <StackPanel Grid.Column="0" Margin="12" Orientation="Vertical">
                 <TextBlock>Tensão</TextBlock>
-                <TextBox Text="{Binding Voltage}"></TextBox>
+                <TextBlock Text="{Binding Voltage}"></TextBlock>
 
                 <TextBlock>Tarifa</TextBlock>
-                <TextBox Text="{Binding Tax}"></TextBox>
+                <TextBlock Text="{Binding Tax}"></TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="12" Orientation="Vertical">
