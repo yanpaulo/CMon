@@ -108,6 +108,7 @@
     <Compile Include="Models\RawReading.cs" />
     <Compile Include="Models\Reading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SensorReader.cs" />
     <Compile Include="ViewModels\MainChartViewModelItem.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
   </ItemGroup>

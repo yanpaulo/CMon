@@ -47,10 +47,10 @@ namespace CMon.IoTApp
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            //using (var db = new AppDbContext())
-            //{
-            //    db.Database.Migrate();
-            //}
+            using (var db = new AppDbContext())
+            {
+                db.Database.Migrate();
+            }
 
             Frame rootFrame = Window.Current.Content as Frame;
             
@@ -84,6 +84,8 @@ namespace CMon.IoTApp
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+            SensorReader.Instance.Start();
         }
 
         /// <summary>
