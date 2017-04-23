@@ -102,7 +102,12 @@
     <Compile Include="Migrations\20170419032159_InitialCreate.designer.cs">
       <DependentUpon>20170419032159_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170423210415_Create_AppConfiguration.cs" />
+    <Compile Include="Migrations\20170423210415_Create_AppConfiguration.designer.cs">
+      <DependentUpon>20170423210415_Create_AppConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
+    <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\AppSingleton.cs" />
     <Compile Include="Models\RawReading.cs" />
