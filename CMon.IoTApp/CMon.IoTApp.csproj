@@ -98,6 +98,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RangePage.xaml.cs">
+      <DependentUpon>RangePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RealTimePage.xaml.cs">
       <DependentUpon>RealTimePage.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,7 @@
     <Compile Include="Models\Reading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorReader.cs" />
+    <Compile Include="ViewModels\RangePageViewModel.cs" />
     <Compile Include="ViewModels\RealTimeViewModelItem.cs" />
     <Compile Include="ViewModels\RealTimeViewModel.cs" />
   </ItemGroup>
@@ -142,6 +146,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RangePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

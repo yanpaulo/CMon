@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMon.IoTApp.Pages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,7 +53,8 @@ namespace CMon.IoTApp
 
         public static List<MenuItem> GetMainItems() =>
             new List<MenuItem>() {
-                new MenuItem() { Icon = Symbol.Clock, Name = "Real Time", PageType = typeof(RealTimePage) }
+                new MenuItem() { Icon = Symbol.Clock, Name = "Tempo Real", PageType = typeof(RealTimePage) },
+                new MenuItem() { Icon = Symbol.Calendar, Name = "Período", PageType = typeof(RangePage) }
             };
 
 
