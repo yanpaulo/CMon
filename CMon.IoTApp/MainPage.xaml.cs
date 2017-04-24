@@ -52,7 +52,7 @@ namespace CMon.IoTApp
 
         public static List<MenuItem> GetMainItems() =>
             new List<MenuItem>() {
-                new MenuItem() { Icon = Symbol.Clock, Name = "Real Time", PageType = typeof(RealTimeView) }
+                new MenuItem() { Icon = Symbol.Clock, Name = "Real Time", PageType = typeof(RealTimePage) }
             };
 
 

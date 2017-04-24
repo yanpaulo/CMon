@@ -27,14 +27,14 @@ namespace CMon.IoTApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RealTimeView : Page
+    public sealed partial class RealTimePage : Page
     {
         private DateTime _startDate;
         private DispatcherTimer _timer;
         private MainPageViewModel _viewModel;
         private List<Reading> _readings;
 
-        public RealTimeView()
+        public RealTimePage()
         {
             this.InitializeComponent();
             _viewModel = (MainPageViewModel)DataContext;
