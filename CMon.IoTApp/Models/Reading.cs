@@ -12,6 +12,10 @@ namespace CMon.IoTApp.Models
 
         public double Value { get; set; }
 
+        public int Voltage { get; set; }
+
+        public double Power { get; set; }
+
         public DateTime Date { get; set; }
     }
 }

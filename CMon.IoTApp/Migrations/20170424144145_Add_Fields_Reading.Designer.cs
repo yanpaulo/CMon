@@ -8,9 +8,10 @@ using CMon.IoTApp.Models;
 namespace CMon.IoTApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170424144145_Add_Fields_Reading")]
+    partial class Add_Fields_Reading
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
