@@ -102,6 +102,9 @@
     <Compile Include="Migrations\20170424144145_Add_Fields_Reading.designer.cs">
       <DependentUpon>20170424144145_Add_Fields_Reading.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DayPage.xaml.cs">
+      <DependentUpon>DayPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RangePage.xaml.cs">
       <DependentUpon>RangePage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,7 @@
     <Compile Include="Models\Reading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorReader.cs" />
+    <Compile Include="ViewModels\DayPageViewModel.cs" />
     <Compile Include="ViewModels\RangePageViewModel.cs" />
     <Compile Include="ViewModels\RealTimeViewModelItem.cs" />
     <Compile Include="ViewModels\RealTimeViewModel.cs" />
@@ -150,6 +154,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

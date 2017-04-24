@@ -54,7 +54,8 @@ namespace CMon.IoTApp
         public static List<MenuItem> GetMainItems() =>
             new List<MenuItem>() {
                 new MenuItem() { Icon = Symbol.Clock, Name = "Tempo Real", PageType = typeof(RealTimePage) },
-                new MenuItem() { Icon = Symbol.Calendar, Name = "Período", PageType = typeof(RangePage) }
+                new MenuItem() { Icon = Symbol.Calendar, Name = "Período", PageType = typeof(RangePage) },
+                new MenuItem() { Icon = Symbol.CalendarDay, Name = "Dia Detalhado", PageType = typeof(DayPage) }
             };
 
 
