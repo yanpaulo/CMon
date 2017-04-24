@@ -49,9 +49,13 @@ namespace CMon.IoTApp.Pages
                 _viewModel.ChartStartDate = _viewModel.StartDate.Date;
                 _viewModel.ChartEndDate = _viewModel.EndDate.Date;
 
-                _viewModel.Readings = db.Readings
+                var readings = db.Readings
                     .Where(r => r.Date >= _viewModel.StartDate && r.Date <= _viewModel.EndDate)
                     .OrderBy(r => r.Date)
+                    .ToList();
+                _viewModel.Readings = readings
+                    .GroupBy(r => r.Date.Date)
+                    .Select(g => new Reading { Date = g.Key, Power = g.Sum(r => r.Power) / (3600 * 1000) })
                     .ToList();
             }
         }

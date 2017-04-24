@@ -24,9 +24,9 @@
                 <sf:DateTimeAxis Minimum="{Binding ChartStartDate}" Maximum="{Binding ChartEndDate}"></sf:DateTimeAxis>
             </sf:SfChart.PrimaryAxis>
             <sf:SfChart.SecondaryAxis>
-                <sf:NumericalAxis Minimum="0"></sf:NumericalAxis>
+                <sf:NumericalAxis StartRangeFromZero="True"></sf:NumericalAxis>
             </sf:SfChart.SecondaryAxis>
-            <sf:SplineAreaSeries ItemsSource="{Binding Readings}" XBindingPath="Date" YBindingPath="Value"></sf:SplineAreaSeries>
+            <sf:ColumnSeries ItemsSource="{Binding Readings}" XBindingPath="Date" YBindingPath="Power"></sf:ColumnSeries>
         </sf:SfChart>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">

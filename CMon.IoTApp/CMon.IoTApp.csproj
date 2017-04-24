@@ -98,6 +98,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170424144145_Add_Fields_Reading.cs" />
+    <Compile Include="Migrations\20170424144145_Add_Fields_Reading.designer.cs">
+      <DependentUpon>20170424144145_Add_Fields_Reading.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RangePage.xaml.cs">
       <DependentUpon>RangePage.xaml</DependentUpon>
     </Compile>
