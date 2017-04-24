@@ -98,6 +98,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RealTimeView.xaml.cs">
+      <DependentUpon>RealTimeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\20170419032159_InitialCreate.cs" />
     <Compile Include="Migrations\20170419032159_InitialCreate.designer.cs">
       <DependentUpon>20170419032159_InitialCreate.cs</DependentUpon>
@@ -139,6 +142,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RealTimeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

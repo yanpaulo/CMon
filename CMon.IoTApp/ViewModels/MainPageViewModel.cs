@@ -55,7 +55,7 @@ namespace CMon.IoTApp.ViewModels
             }
         }
 
-        public decimal? ConsumptionMoney => (decimal)ConsumptionKW * Tax;
+        public decimal? ConsumptionMoney => (decimal?)ConsumptionKW * Tax;
 
         public IEnumerable<MainChartViewModelItem> ChartItems
         {

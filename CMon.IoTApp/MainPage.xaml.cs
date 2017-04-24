@@ -1,17 +1,10 @@
-﻿using CMon.IoTApp.Models;
-using CMon.IoTApp.ViewModels;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Devices.Enumeration;
-using Windows.Devices.SerialCommunication;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace CMon.IoTApp
 {
@@ -29,66 +22,40 @@ namespace CMon.IoTApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private DateTime _startDate;
-        private DispatcherTimer _timer;
-        private MainPageViewModel _viewModel;
-        private List<Reading> _readings;
-
+        private List<MenuItem> _mainMenuItems,
+            _optionsMenuItems;
         public MainPage()
         {
             this.InitializeComponent();
-            _viewModel = (MainPageViewModel)DataContext;
+
+            _mainMenuItems = MenuItem.GetMainItems();
+            _optionsMenuItems = MenuItem.GetOptionsItems();
+            hamburgerMenuControl.ItemsSource = _mainMenuItems;
+            hamburgerMenuControl.OptionsItemsSource = _optionsMenuItems;
+
+            hamburgerMenuControl.SelectedIndex = 0;
+            contentFrame.Navigate(_mainMenuItems.First().PageType);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void OnMenuItemClick(object sender, ItemClickEventArgs e)
         {
-            using (var db =  new AppDbContext())
-            {
-                var config = db.GetAppConfiguration();
-                _viewModel.Voltage = config.Voltage;
-                _viewModel.Tax = config.Tax;
-            }
-
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            _timer.Tick += Timer_Tick;
-
-            _startDate = DateTime.Now;
-            _timer.Start();
+            var menuItem = e.ClickedItem as MenuItem;
+            contentFrame.Navigate(menuItem.PageType);
         }
+    }
 
-        private void Timer_Tick(object sender, object e)
-        {
-            var now = DateTime.Now;
-            
-            using (var db = new AppDbContext())
-            {
-                DateTime min = now - TimeSpan.FromSeconds(60);
-                _readings = db.Readings
-                    .Where(r => r.Date > min)
-                    .OrderByDescending(r => r.Date)
-                    .ToList();
+    public class MenuItem
+    {
+        public Symbol Icon { get; set; }
+        public string Name { get; set; }
+        public Type PageType { get; set; }
 
-                var last = _readings.FirstOrDefault();
-                if (last != null)
-                {
-                    last.Date = now;
-                }
-            }
+        public static List<MenuItem> GetMainItems() =>
+            new List<MenuItem>() {
+                new MenuItem() { Icon = Symbol.Clock, Name = "Real Time", PageType = typeof(RealTimeView) }
+            };
 
 
-            _viewModel.Power = _viewModel.Voltage * _readings.FirstOrDefault()?.Value;
-            _viewModel.ConsumptionKW += _viewModel.Power / (3600 * 1000);
-            _viewModel.Time = now - _startDate;
-            
-            UpdateChart(now);
-        }
-
-        private void UpdateChart(DateTime now)
-        {
-            _viewModel.ChartItems =
-                _readings
-                .Select(r => new MainChartViewModelItem { Power = r.Value * _viewModel.Voltage.GetValueOrDefault(0), Time = now - r.Date })
-                .ToArray();
-        }
+        public static List<MenuItem> GetOptionsItems() => new List<MenuItem>();
     }
 }
