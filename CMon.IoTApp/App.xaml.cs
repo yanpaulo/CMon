@@ -86,6 +86,7 @@ namespace CMon.IoTApp
             }
 
             //SensorReader.Instance.Start();
+            //DataSynchronizer.Instance.Start();
         }
 
         /// <summary>

@@ -75,7 +75,10 @@ namespace CMon.IoTApp
                         Power = config.Voltage * reading.Current,
                         Date = DateTime.Now
                     });
-                    db.SaveChanges();
+                    lock (AppDbContext.LockObject)
+                    {
+                        db.SaveChanges(); 
+                    }
                 }
             }
         }

@@ -9,6 +9,8 @@ namespace CMon.IoTApp.Models
 {
     public class AppDbContext : DbContext
     {
+        public static object LockObject { get; private set; } = new object();
+
         public virtual DbSet<Reading> Readings { get; set; }
 
         protected virtual DbSet<AppConfiguration> AppConfiguration { get; set; }
