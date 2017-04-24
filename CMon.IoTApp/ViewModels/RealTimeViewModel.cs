@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace CMon.IoTApp.ViewModels
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class RealTimeViewModel : INotifyPropertyChanged
     {
         private int? _voltage;
         private decimal? _tax;
         private double? _power;
         private double? _consumptionKW;
         private TimeSpan _time;
-        private IEnumerable<MainChartViewModelItem> _chartItems;
+        private IEnumerable<RealTimeViewModelItem> _chartItems;
 
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -57,7 +57,7 @@ namespace CMon.IoTApp.ViewModels
 
         public decimal? ConsumptionMoney => (decimal?)ConsumptionKW * Tax;
 
-        public IEnumerable<MainChartViewModelItem> ChartItems
+        public IEnumerable<RealTimeViewModelItem> ChartItems
         {
             get { return _chartItems; }
             set { _chartItems = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ChartItems")); }

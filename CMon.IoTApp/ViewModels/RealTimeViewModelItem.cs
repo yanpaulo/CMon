@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CMon.IoTApp.ViewModels
 {
-    public class MainChartViewModelItem
+    public class RealTimeViewModelItem
     {
         public double Power { get; set; }
 

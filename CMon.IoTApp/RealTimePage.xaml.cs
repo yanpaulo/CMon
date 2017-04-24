@@ -31,13 +31,13 @@ namespace CMon.IoTApp
     {
         private DateTime _startDate;
         private DispatcherTimer _timer;
-        private MainPageViewModel _viewModel;
+        private RealTimeViewModel _viewModel;
         private List<Reading> _readings;
 
         public RealTimePage()
         {
             this.InitializeComponent();
-            _viewModel = (MainPageViewModel)DataContext;
+            _viewModel = (RealTimeViewModel)DataContext;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -87,7 +87,7 @@ namespace CMon.IoTApp
         {
             _viewModel.ChartItems =
                 _readings
-                .Select(r => new MainChartViewModelItem { Power = r.Value * _viewModel.Voltage.GetValueOrDefault(0), Time = now - r.Date })
+                .Select(r => new RealTimeViewModelItem { Power = r.Value * _viewModel.Voltage.GetValueOrDefault(0), Time = now - r.Date })
                 .ToArray();
         }
     }

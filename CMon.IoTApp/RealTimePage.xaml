@@ -10,7 +10,7 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
     <Page.DataContext>
-        <vm:MainPageViewModel></vm:MainPageViewModel>
+        <vm:RealTimeViewModel></vm:RealTimeViewModel>
     </Page.DataContext>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
