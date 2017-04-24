@@ -102,6 +102,10 @@
     <Compile Include="Migrations\20170424144145_Add_Fields_Reading.designer.cs">
       <DependentUpon>20170424144145_Add_Fields_Reading.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170424205915_Add_Field_Reading_Synchronized.cs" />
+    <Compile Include="Migrations\20170424205915_Add_Field_Reading_Synchronized.designer.cs">
+      <DependentUpon>20170424205915_Add_Field_Reading_Synchronized.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DayPage.xaml.cs">
       <DependentUpon>DayPage.xaml</DependentUpon>
     </Compile>

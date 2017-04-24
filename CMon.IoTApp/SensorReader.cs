@@ -17,7 +17,7 @@ namespace CMon.IoTApp
     {
         public static SensorReader Instance { get; } = new SensorReader();
         private SensorReader() { }
-        
+
         private ThreadPoolTimer _timer;
         private bool _started;
         private object _lockObject = new object();
@@ -63,10 +63,20 @@ namespace CMon.IoTApp
             Debug.Write(json);
             var reading = JsonConvert.DeserializeObject<RawReading>(json);
 
-            using (var db = new AppDbContext())
+            if (reading.Current >= 0.03)
             {
-                db.Readings.Add(new Models.Reading { Value = reading.Current, Date = DateTime.Now });
-                db.SaveChanges();
+                using (var db = new AppDbContext())
+                {
+                    var config = db.GetAppConfiguration();
+                    db.Readings.Add(new Models.Reading
+                    {
+                        Value = reading.Current,
+                        Voltage = config.Voltage,
+                        Power = config.Voltage * reading.Current,
+                        Date = DateTime.Now
+                    });
+                    db.SaveChanges();
+                }
             }
         }
     }

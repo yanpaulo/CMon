@@ -16,6 +16,8 @@ namespace CMon.IoTApp.Models
 
         public double Power { get; set; }
 
+        public bool Synchronized { get; set; }
+
         public DateTime Date { get; set; }
     }
 }
