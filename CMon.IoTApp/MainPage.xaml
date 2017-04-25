@@ -29,7 +29,16 @@
                                 ItemClick="OnMenuItemClick"
                                 OptionsItemTemplate="{StaticResource DefaultTemplate}"
                                 OptionsItemClick="OnMenuItemClick">
-            <Frame x:Name="contentFrame" Foreground="Black"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="8" Style="{ThemeResource HeaderTextBlockStyle}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}">CMon</TextBlock>
+                <Frame Grid.Row="1" x:Name="contentFrame" Foreground="Black"/>    
+            </Grid>
+            
         </controls:HamburgerMenu>
     </Grid>
 </Page>

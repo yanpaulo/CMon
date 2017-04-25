@@ -4,5 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CMon.IoTApp"
     RequestedTheme="Light">
+    <Application.Resources>
+        <Style TargetType="TextBlock" x:Name="Label">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Margin" Value="0,16,0,0"></Setter>
+        </Style>
 
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="0,12"></Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0,8"></Setter>
+        </Style>
+    </Application.Resources>
 </Application>

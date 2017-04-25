@@ -14,14 +14,12 @@
     </Page.DataContext>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="8">CMon</TextBlock>
 
         <!--<Rectangle Grid.Row="1" Fill="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12"></Rectangle>-->
-        <sf:SfChart Grid.Row="1" Margin="12">
+        <sf:SfChart Grid.Row="0" Margin="12">
             <sf:SfChart.PrimaryAxis>
                 <sf:TimeSpanAxis Interval="00:00:10" Minimum="00:00:00" Maximum="00:01:00" IsInversed="True"></sf:TimeSpanAxis>
             </sf:SfChart.PrimaryAxis>
@@ -31,7 +29,7 @@
             <sf:SplineAreaSeries ItemsSource="{Binding ChartItems}" XBindingPath="Time" YBindingPath="Power"></sf:SplineAreaSeries>
         </sf:SfChart>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -39,26 +37,26 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Margin="12" Orientation="Vertical">
-                <TextBlock>Tensão</TextBlock>
+                <TextBlock Style="{StaticResource Label}">Tensão</TextBlock>
                 <TextBlock Text="{Binding Voltage}"></TextBlock>
 
-                <TextBlock>Tarifa</TextBlock>
+                <TextBlock Style="{StaticResource Label}">Tarifa</TextBlock>
                 <TextBlock Text="{Binding Tax}"></TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="12" Orientation="Vertical">
-                <TextBlock>Potência (w)</TextBlock>
+                <TextBlock Style="{StaticResource Label}">Potência (w)</TextBlock>
                 <TextBlock Text="{Binding Power}"></TextBlock>
 
-                <TextBlock>Tempo</TextBlock>
+                <TextBlock Style="{StaticResource Label}">Tempo</TextBlock>
                 <TextBlock Text="{Binding Time}"></TextBlock>
 
-                <TextBlock>Consumo (kW/h)</TextBlock>
+                <TextBlock Style="{StaticResource Label}">Consumo (kW/h)</TextBlock>
                 <TextBlock Text="{Binding ConsumptionKW}"></TextBlock>
             </StackPanel>
 
             <StackPanel Grid.Column="2" Margin="12">
-                <TextBlock>Consumo (R$)</TextBlock>
+                <TextBlock Style="{StaticResource Label}">Consumo (R$)</TextBlock>
                 <TextBlock Text="{Binding ConsumptionMoney}"></TextBlock>
             </StackPanel>
         </Grid>

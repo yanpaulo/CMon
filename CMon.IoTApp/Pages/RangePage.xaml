@@ -30,10 +30,10 @@
         </sf:SfChart>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock>Início</TextBlock>
+            <TextBlock Style="{StaticResource Label}">Início</TextBlock>
             <DatePicker Date="{Binding Path=StartDate, Mode=TwoWay}" />
 
-            <TextBlock>Fim</TextBlock>
+            <TextBlock Style="{StaticResource Label}">Fim</TextBlock>
             <DatePicker Date="{Binding Path=EndDate, Mode=TwoWay}" />
         </StackPanel>
 
