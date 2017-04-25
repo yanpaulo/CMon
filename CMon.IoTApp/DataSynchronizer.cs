@@ -17,7 +17,7 @@ namespace CMon.IoTApp
         {
             _client = new HttpClient
             {
-                BaseAddress = new Uri("http://cmon.yanscorp.com/api/Sync")
+                BaseAddress = new Uri("http://localhost:51604/api/Sync")
             };
         }
 
@@ -49,7 +49,7 @@ namespace CMon.IoTApp
                     .Take(150)
                     .ToList();
 
-                var content = new StringContent(JsonConvert.SerializeObject(readings));
+                var content = new StringContent(JsonConvert.SerializeObject(readings), Encoding.UTF8, "application/json");
                 var result = await _client.PostAsync("", content);
                 if (result.IsSuccessStatusCode)
                 {
