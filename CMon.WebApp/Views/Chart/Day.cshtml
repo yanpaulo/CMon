@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Day";
+}
+
+<h2>Day</h2>
+
+@using (Html.BeginForm("Day", "Chart", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h4>Data para gerar o gráfico</h4>
+    <hr />
+
+    <div class="form-group">
+        @Html.Label("Day", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBox("Day", "", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <input type="submit" value="Gerar" />
+}
