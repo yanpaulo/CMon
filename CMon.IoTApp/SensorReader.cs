@@ -63,7 +63,7 @@ namespace CMon.IoTApp
             Debug.Write(json);
             var reading = JsonConvert.DeserializeObject<RawReading>(json);
 
-            if (reading.Current >= 0.03)
+            if (reading.Current >= 0.08)
             {
                 using (var db = new AppDbContext())
                 {
