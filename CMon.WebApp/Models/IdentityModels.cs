@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace CMon.WebApp.Models
 {
@@ -16,18 +17,27 @@ namespace CMon.WebApp.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual ICollection<Reading> Readings { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+            : base("DefaultConnection", throwIfV1Schema: false) { }
 
-        public static ApplicationDbContext Create()
+        public static ApplicationDbContext Create() => new ApplicationDbContext();
+
+        public virtual DbSet<Reading> Readings { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            return new ApplicationDbContext();
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.Readings)
+                .WithRequired()
+                .HasForeignKey(r => r.ApplicationUserId)
+                .WillCascadeOnDelete();
         }
     }
 }
